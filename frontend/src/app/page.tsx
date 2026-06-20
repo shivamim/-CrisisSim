@@ -83,3 +83,31 @@ export default function HomePage() {
           </div>
         ) : (
           <div className="grid gap-4">
+            {simulations.map((sim) => (
+              <Link
+                href={`/simulations/${sim.id}`}
+                key={sim.id}
+                className="bg-white p-4 rounded-xl border shadow-sm hover:shadow-md transition flex items-center justify-between"
+              >
+                <div>
+                  <h3 className="font-medium">{sim.title}</h3>
+                  <p className="text-xs text-gray-400 mt-1">
+                    {new Date(sim.created_at).toLocaleString()}
+                  </p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className={`text-xl font-bold ${getRiskColor(sim.risk_score)}`}>
+                    {sim.risk_score !== null ? sim.risk_score : '--'}
+                  </span>
+                  <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                    {sim.status}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
